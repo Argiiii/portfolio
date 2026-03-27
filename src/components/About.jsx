@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Plus,
-  Edit2,
-  Trash2,
-} from 'lucide-react';
+import { Plus, Edit2, Trash2 } from 'lucide-react';
 import { useStats } from '../hooks/useStats';
 import { useLanguage } from '../i18n/LanguageContext';
 import Modal from './common/Modal';
@@ -67,9 +63,10 @@ export default function About() {
     }
   };
 
-  const yearsExperience = stats.find(s => 
-    s.label === 'Tahun Pengalaman' || s.label === 'Years of Experience'
-  )?.value || '5+';
+  const yearsExperience =
+    stats.find(
+      (s) => s.label === 'Tahun Pengalaman' || s.label === 'Years of Experience'
+    )?.value || '2+';
 
   const story1Params = {
     id: `Saya memulai perjalanan di dunia pemrograman sejak duduk di bangku kuliah, where I discovered my passion for building web applications. Selama ${yearsExperience} tahun terakhir, saya telah bekerja dengan berbagai klien dari startup hingga perusahaan besar.`,
@@ -86,13 +83,14 @@ export default function About() {
           className='text-center mb-16'
         >
           <h2 className='text-3xl md:text-4xl font-bold mb-4'>
-            <span className='gradient-text'>{language === 'id' ? 'Tentang Saya' : 'About Me'}</span>
+            <span className='gradient-text'>
+              {language === 'id' ? 'Tentang Saya' : 'About Me'}
+            </span>
           </h2>
           <p className='text-slate-400 text-lg max-w-2xl mx-auto'>
-            {language === 'id' 
-              ? 'Saya adalah developer yang passionate dalam menciptakan solusi digital yang inovatif dan berdampak positif.' 
-              : 'I am a passionate developer creating innovative and impactful digital solutions.'
-            }
+            {language === 'id'
+              ? 'Saya adalah developer yang passionate dalam menciptakan solusi digital yang inovatif dan berdampak positif.'
+              : 'I am a passionate developer creating innovative and impactful digital solutions.'}
           </p>
         </motion.div>
 
@@ -166,12 +164,8 @@ export default function About() {
           <h3 className='text-2xl font-semibold mb-6'>{t('about.story')}</h3>
           <div className='grid lg:grid-cols-2 gap-8'>
             <div className='space-y-4 text-slate-300 leading-loose'>
-              <p>
-                {language === 'id' ? story1Params.id : story1Params.en}
-              </p>
-              <p>
-                {t('about.story2')}
-              </p>
+              <p>{language === 'id' ? story1Params.id : story1Params.en}</p>
+              <p>{t('about.story2')}</p>
             </div>
             <div>
               <h4 className='text-lg font-semibold mb-4'>
@@ -203,10 +197,15 @@ export default function About() {
           setIsModalOpen(false);
           setEditingStat(null);
         }}
-        title={editingStat 
-            ? (language === 'id' ? 'Edit Statistic' : 'Edit Statistic') 
-            : (language === 'id' ? 'Tambah Statistic Baru' : 'Add New Statistic')
-          }
+        title={
+          editingStat
+            ? language === 'id'
+              ? 'Edit Statistic'
+              : 'Edit Statistic'
+            : language === 'id'
+              ? 'Tambah Statistic Baru'
+              : 'Add New Statistic'
+        }
         size='sm'
       >
         <StatForm
@@ -231,13 +230,14 @@ export default function About() {
             <Trash2 size={32} className='text-red-500' />
           </div>
           <p className='text-slate-300 mb-2'>
-            {language === 'id' 
+            {language === 'id'
               ? `Apakah Anda yakin ingin menghapus statistic "${deleteConfirm?.label}"?`
-              : `Are you sure you want to delete statistic "${deleteConfirm?.label}"?`
-            }
+              : `Are you sure you want to delete statistic "${deleteConfirm?.label}"?`}
           </p>
           <p className='text-slate-500 text-sm mb-6'>
-            {language === 'id' ? 'Tindakan ini tidak dapat dibatalkan.' : 'This action cannot be undone.'}
+            {language === 'id'
+              ? 'Tindakan ini tidak dapat dibatalkan.'
+              : 'This action cannot be undone.'}
           </p>
           <div className='flex gap-4'>
             <button
