@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-
-const STORAGE_KEY = 'portfolio_projects';
+import { useState, useEffect, useCallback } from 'react';
+import { projectsAPI } from '../api';
 
 const defaultProjects = [
   {
@@ -66,48 +65,61 @@ const defaultProjects = [
 ];
 
 export function useProjects() {
-  const [projects, setProjects] = useState(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        return JSON.parse(stored);
-      } catch {
-        return defaultProjects;
-      }
-    }
-    return defaultProjects;
-  });
-
+  const [projects, setProjects] = useState(defaultProjects);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const loadProjects = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const data = await projectsAPI.getAll();
+      if (data && data.length > 0) {
+        setProjects(data);
+      }
+    } catch (err) {
+      console.error('Failed to load projects:', err);
+      setError(err.message);
+    } finally {
       setIsLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-  }, [projects]);
+    loadProjects();
+  }, [loadProjects]);
 
-  const addProject = (project) => {
-    const newProject = {
-      ...project,
-      id: Date.now().toString(),
-    };
-    setProjects((prev) => [newProject, ...prev]);
-    return newProject;
+  const addProject = async (project) => {
+    try {
+      const newProject = await projectsAPI.create(project);
+      setProjects((prev) => [newProject, ...prev]);
+      return newProject;
+    } catch (err) {
+      console.error('Failed to add project:', err);
+      throw err;
+    }
   };
 
-  const updateProject = (id, updatedProject) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, ...updatedProject } : p))
-    );
+  const updateProject = async (id, updatedProject) => {
+    try {
+      const updated = await projectsAPI.update(id, updatedProject);
+      setProjects((prev) =>
+        prev.map((p) => (p.id === id ? updated : p))
+      );
+      return updated;
+    } catch (err) {
+      console.error('Failed to update project:', err);
+      throw err;
+    }
   };
 
-  const deleteProject = (id) => {
-    setProjects((prev) => prev.filter((p) => p.id !== id));
+  const deleteProject = async (id) => {
+    try {
+      await projectsAPI.delete(id);
+      setProjects((prev) => prev.filter((p) => p.id !== id));
+    } catch (err) {
+      console.error('Failed to delete project:', err);
+      throw err;
+    }
   };
 
   const getProject = (id) => {
@@ -117,9 +129,11 @@ export function useProjects() {
   return {
     projects,
     isLoading,
+    error,
     addProject,
     updateProject,
     deleteProject,
     getProject,
+    refresh: loadProjects,
   };
 }
