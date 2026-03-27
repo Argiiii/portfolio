@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { statsAPI } from '../api';
 
 const defaultStats = [
-  { id: '1', icon: '💼', value: '5+', label: 'Tahun Pengalaman', label_en: 'Years of Experience' },
-  { id: '2', icon: '🎯', value: '50+', label: 'Proyek Selesai', label_en: 'Projects Completed' },
-  { id: '3', icon: '🏆', value: '10+', label: 'Sertifikasi', label_en: 'Certifications' },
+  { id: '1', icon: '💼', value: '2+', label: 'Tahun Pengalaman', label_en: 'Years of Experience' },
+  { id: '2', icon: '🎯', value: '10+', label: 'Proyek Selesai', label_en: 'Projects Completed' },
+  { id: '3', icon: '🏆', value: '2+', label: 'Sertifikasi', label_en: 'Certifications' },
   { id: '4', icon: '⭐', value: '100%', label: 'Kepuasan Klien', label_en: 'Client Satisfaction' },
 ];
 
