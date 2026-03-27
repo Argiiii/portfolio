@@ -152,6 +152,45 @@ try {
 
 ---
 
+## Database Operations
+
+Data projects dan stats disimpan di SQLite database (`server/database.sqlite`).
+
+### Akses Database Langsung
+```bash
+cd portfolio
+node -e "const db = require('better-sqlite3')('./server/database.sqlite'); console.log(JSON.stringify(db.prepare('SELECT * FROM stats').all(), null, 2));"
+```
+
+### Menambahkan Project
+```bash
+node -e "const db = require('better-sqlite3')('./server/database.sqlite'); const id = Date.now().toString(); db.prepare(\"INSERT INTO projects (id, title, description, tags, category, image, github, live, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))\").run(id, 'Project Name', 'Description', '[\"React.js\"]', 'web', '🖥️', 'https://github.com', 'https://demo.com');"
+```
+
+### Mengupdate Data
+```bash
+# Update stats
+node -e "const db = require('better-sqlite3')('./server/database.sqlite'); db.prepare('UPDATE stats SET value = ? WHERE id = ?').run('10+', '1');"
+
+# Update project
+node -e "const db = require('better-sqlite3')('./server/database.sqlite'); db.prepare('UPDATE projects SET description = ?, tags = ? WHERE title = ?').run('New description', '[\"React\"]', 'ProjectName');"
+```
+
+### Default Stats Values
+- Tahun Pengalaman: 2+
+- Proyek Selesai: 10+
+- Sertifikasi: 2+
+- Kepuasan Klien: 100%
+
+### Project: ada.com
+- **Deskripsi**: Aplikasi hotel dan traveling komprehensif yang memungkinkan pengguna mencari, membandingkan, dan memesan akomodasi serta paket perjalanan. Fitur utama mencakup pemesanan kamar hotel, reservasi pesawat, rencana perjalanan, review tempat wisata, dan pembayaran aman.
+- **Tags**: ["React.js", "Node.js", "Vercel"]
+- **Category**: web
+- **Demo**: https://adaacom.vercel.app/
+- **GitHub**: https://github.com/Argiiii/ada.com
+
+---
+
 ## Personal Information
 - **Name**: Argi Chanaffi, S.Kom.
 - **Email**: argich034@gmail.com
