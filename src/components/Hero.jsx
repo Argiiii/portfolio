@@ -21,7 +21,7 @@ export default function Hero() {
         style={{ animationDelay: '1.5s' }}
       />
 
-      <div className='max-w-7xl mx-auto px-6 lg:px-16 py-32 relative z-10'>
+      <div className='max-w-7xl mx-auto px-6 lg:px-16 py-16 md:py-24 relative z-10'>
         <div className='grid lg:grid-cols-2 gap-12 items-center'>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -40,7 +40,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
             >
               <span className="gradient-text">Argi Chanaffi, S.Kom.</span>
             </motion.h1>
@@ -48,7 +48,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-xl text-slate-400 leading-relaxed mb-8"
+              className="text-base md:text-lg text-slate-400 leading-relaxed mb-6"
             >
               {t('hero.description')}
             </motion.p>
@@ -57,7 +57,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className='flex flex-wrap gap-4 mb-8'
+              className='flex flex-wrap gap-3 mb-6'
             >
               <motion.a
                 href="#projects"
@@ -124,21 +124,6 @@ export default function Hero() {
             </div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className='absolute bottom-10 left-1/2 -translate-x-1/2'
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className='w-6 h-10 border-2 border-slate-600 rounded-full flex justify-center pt-2'
-          >
-            <div className='w-1 h-2 bg-blue-500 rounded-full' />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

@@ -3,24 +3,14 @@ import { projectsAPI } from '../api';
 
 const defaultProjects = [
   {
-    id: '1',
-    title: 'E-Commerce Platform',
-    description: 'Platform e-commerce lengkap dengan fitur keranjang belanja, pembayaran, dan manajemen produk.',
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Stripe'],
-    category: 'web',
-    image: '🛒',
-    github: 'https://github.com',
-    live: 'https://demo.com',
-  },
-  {
     id: '2',
-    title: 'Task Management App',
-    description: 'Aplikasi manajemen tugas dengan fitur drag-and-drop, kolaborasi tim, dan notifikasi real-time.',
+    title: 'Smart Saving App',
+    description: 'Smart Saving App merupakan aplikasi manajemen keuangan pribadi berbasis digital yang dirancang untuk membantu pengguna mengelola, merencanakan, dan meningkatkan kebiasan secara cerdas dengan dukungan teknologi kecerdasan buatan AI.',
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Socket.io'],
     category: 'web',
     image: '📋',
-    github: 'https://github.com',
-    live: 'https://demo.com',
+    github: 'https://github.com/Argiiii/smart.app',
+    live: 'https://smart-saving-app.vercel.app/',
   },
   {
     id: '3',
@@ -44,13 +34,13 @@ const defaultProjects = [
   },
   {
     id: '5',
-    title: 'AI Chat Application',
-    description: 'Aplikasi chat dengan integrasi AI untuk assistance dan automated responses.',
+    title: 'E-commerce ShopFlex',
+    description: 'Platform e-commerce modern yang dirancang untuk memberikan pengalaman belanja online yang fleksibel, cerdas, dan personal bagi pengguna.',
     tags: ['Python', 'OpenAI API', 'FastAPI', 'React'],
     category: 'ai',
     image: '🤖',
-    github: 'https://github.com',
-    live: 'https://demo.com',
+    github: 'https://github.com/Argiiii/ecommerce',
+    live: 'https://e-commerce-shopflex.vercel.app',
   },
   {
     id: '6',

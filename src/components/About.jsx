@@ -74,15 +74,15 @@ export default function About() {
   };
 
   return (
-    <section id='about' className='py-32 bg-slate-900/50'>
+    <section id='about' className='py-12 bg-slate-900/50'>
       <div className='max-w-7xl mx-auto px-6 lg:px-16'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className='text-center mb-16'
+          className='text-center mb-6'
         >
-          <h2 className='text-3xl md:text-4xl font-bold mb-4'>
+          <h2 className='text-2xl md:text-3xl font-bold mb-3'>
             <span className='gradient-text'>
               {language === 'id' ? 'Tentang Saya' : 'About Me'}
             </span>
@@ -106,7 +106,7 @@ export default function About() {
           </motion.button>
         </div>
 
-        <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-3 mb-8'>
           <AnimatePresence mode='popLayout'>
             {stats.map((stat, index) => (
               <motion.div
@@ -159,10 +159,10 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className='glass rounded-2xl p-8 lg:p-12'
+          className='glass rounded-2xl p-6 lg:p-8'
         >
           <h3 className='text-2xl font-semibold mb-6'>{t('about.story')}</h3>
-          <div className='grid lg:grid-cols-2 gap-8'>
+          <div className='grid lg:grid-cols-2 gap-6'>
             <div className='space-y-4 text-slate-300 leading-loose'>
               <p>{language === 'id' ? story1Params.id : story1Params.en}</p>
               <p>{t('about.story2')}</p>

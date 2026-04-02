@@ -85,15 +85,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32">
+    <section id="contact" className="py-8 bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">
             <span className="gradient-text">{language === 'id' ? 'Hubungi Saya' : 'Contact Me'}</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
@@ -101,7 +101,7 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
