@@ -2,7 +2,7 @@
 
 ## Project Overview
 - **Type**: Personal Portfolio Website
-- **Tech Stack**: React 19 + Vite, Tailwind CSS 4, Framer Motion, Lucide React, EmailJS, Express backend
+- **Tech Stack**: React 19 + Vite, Tailwind CSS 4, Framer Motion, Lucide React, EmailJS
 - **Node.js**: ESM modules (`"type": "module"` in package.json)
 
 ---
@@ -11,38 +11,36 @@
 
 ### Development
 ```bash
-cd portfolio && npm run dev
+npm run dev
 ```
 Runs at `http://localhost:5173` (or next available port).
 
 ### Build for Production
 ```bash
-cd portfolio && npm run build
+npm run build
 ```
-Output in `portfolio/dist` folder.
+Output in `dist/` folder.
 
 ### Preview Production Build
 ```bash
-cd portfolio && npm run preview
+npm run preview
 ```
 
 ### Linting
 ```bash
-cd portfolio && npm run lint
+npm run lint
 ```
-ESLint with flat config. Ignores `dist/` and `server/` directories. `no-unused-vars` is disabled (use `_` prefix for unused args).
+ESLint with flat config. Ignores `dist/` and `server/` directories.
+- `no-unused-vars` is disabled (use `_` prefix for unused args)
 
 ### Server (Backend API)
 ```bash
-cd portfolio && npm run server
+npm run server
 ```
 Express server at `http://localhost:3001`.
 
-### Testing
-No test framework configured. To add tests:
+### Running a Single Test (if tests configured)
 ```bash
-npm install -D vitest @testing-library/react jsdom
-# Add to package.json: "test": "vitest run"
 npx vitest run src/components/Navbar.test.jsx
 ```
 
@@ -122,16 +120,6 @@ portfolio/
 
 ---
 
-## API Endpoints (Express + SQLite)
-
-- `GET /api/projects` - Get all projects
-- `POST /api/projects` - Create project
-- `PUT /api/projects/:id` - Update project
-- `DELETE /api/projects/:id` - Delete project
-- Similar endpoints for `/api/stats`
-
----
-
 ## Common Tasks
 
 ### Adding a New Component
@@ -143,7 +131,6 @@ portfolio/
 ### Adding CRUD Functionality
 - Create custom hook in `hooks/` directory
 - Use `localStorage` for frontend persistence
-- Use Express API routes in `server/index.cjs` for backend
 
 ---
 
@@ -163,31 +150,36 @@ portfolio/
 
 ---
 
-## Project Data (SQLite + useProjects.js)
+## Project Data
+Project data is stored in `src/hooks/useProjects.js` (no database).
 
-Default projects yang tersimpan di database SQLite dan fallback di `src/hooks/useProjects.js`:
+| # | Title | GitHub | Live Demo |
+|---|-------|--------|-----------|
+| 1 | Ada.com | github.com/Argiiii/ada.com | adaacom.vercel.app |
+| 2 | Smart Saving App | github.com/Argiiii/smart.app | smart-saving-app.vercel.app |
+| 3 | Portfolio Website | github.com | demo.com |
+| 4 | Mobile Banking App | github.com | demo.com |
+| 5 | E-commerce ShopFlex | github.com/Argiiii/ecommerce | e-commerce-shopflex.vercel.app |
+| 6 | Fitness Tracker | github.com | demo.com |
 
-| No | Title | Description | GitHub | Live Demo |
-|----|-------|-------------|--------|-----------|
-| 1 | Ada.com | Aplikasi hotel dan traveling komprehensif dengan fitur pemesanan kamar, reservasi pesawat, rencana perjalanan, dan pembayaran aman. | https://github.com/Argiiii/ada.com | https://adaacom.vercel.app/ |
-| 2 | Smart Saving App | Aplikasi manajemen keuangan pribadi berbasis digital yang dirancang untuk membantu pengguna mengelola, merencanakan, dan meningkatkan kebiasan secara cerdas dengan dukungan teknologi AI. | https://github.com/Argiiii/smart.app | https://smart-saving-app.vercel.app/ |
-| 3 | Portfolio Website | Website portofolio responsif dengan animasi modern dan design yang elegan. | https://github.com | https://argichanaffi.vercel.app |
-| 4 | Mobile Banking App | Aplikasi banking mobile dengan fitur transfer, tagihan, dan investasi. | https://github.com | https://demo.com |
-| 5 | E-commerce ShopFlex | Platform e-commerce modern yang dirancang untuk memberikan pengalaman belanja online yang fleksibel, cerdas, dan personal. | https://github.com/Argiiii/ecommerce | https://e-commerce-shopflex.vercel.app |
-| 6 | Fitness Tracker | Aplikasi pelacak kebugaran dengan fitur workout plans dan progress tracking. | https://github.com | https://demo.com |
+---
 
-### Update Project di Database
-```bash
-# Via Node.js script
-node -e "const Database = require('better-sqlite3'); const db = new Database('./server/database.sqlite'); db.prepare('UPDATE projects SET title = ?, description = ?, github = ?, live = ? WHERE title = ?').run('New Title', 'Description', 'https://github.com/...', 'https://demo.com/', 'Old Title'); console.log('Updated'); db.close();"
-```
+## Recent Changes
 
-### Delete Project di Database
-```bash
-node -e "const Database = require('better-sqlite3'); const db = new Database('./server/database.sqlite'); db.prepare('DELETE FROM projects WHERE id = ?').run('1'); console.log('Deleted'); db.close();"
-```
+### Removed Database (SQLite)
+- Project data is stored directly in `src/hooks/useProjects.js`
+- No Express server needed for frontend-only development
 
-### Verifikasi Data Database
-```bash
-node -e "const Database = require('better-sqlite3'); const db = new Database('./server/database.sqlite'); console.log(JSON.stringify(db.prepare('SELECT * FROM projects').all(), null, 2)); db.close();"
-```
+### Project Card Styling
+- Compact cards with smaller height
+- GitHub/Live Demo buttons in single row (flex-1)
+- GitHub: slate-800 background, gray text
+- Live Demo: gradient blue-to-purple background, white text
+- Tags: smaller and compact
+- Description uses line-clamp-2
+
+### Project Buttons (Projects.jsx)
+- Button teks: "Link GitHub" dan "Live Demo"
+- Ukuran lebih kecil dan profesional (py-2, text-xs, icon 14px)
+- Hover effect halus dengan scale
+- Tidak ada label "Teknologi:" pada tags
