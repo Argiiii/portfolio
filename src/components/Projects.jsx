@@ -199,8 +199,7 @@ export default function Projects() {
                       {project.description}
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="text-xs text-slate-500 mr-1">{language === 'id' ? 'Teknologi:' : 'Tech:'}</span>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {project.tags.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
@@ -216,17 +215,18 @@ export default function Projects() {
                       )}
                     </div>
                     
-                    <div className="flex gap-3 pt-3 border-t border-slate-700/50">
+                    <div className="flex gap-2 pt-3 border-t border-slate-700/50">
                       {project.github && (
                         <motion.a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ scale: 1.05 }}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 hover:text-white transition-colors text-xs"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-slate-800/80 hover:bg-slate-700 rounded-md text-slate-300 hover:text-white transition-all text-xs font-medium"
                         >
                           <Github size={14} />
-                          <span className="truncate">{project.github.replace('https://github.com/', '')}</span>
+                          <span>Link GitHub</span>
                         </motion.a>
                       )}
                       {project.live && (
@@ -234,11 +234,12 @@ export default function Projects() {
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ scale: 1.05 }}
-                          className="flex-1 flex items-center justify-center gap-1.5 py-2 gradient-bg rounded-lg text-white text-xs font-medium"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-md text-white text-xs font-medium transition-all"
                         >
                           <ExternalLink size={14} />
-                          <span className="truncate">{project.live.replace('https://', '').replace('http://', '')}</span>
+                          <span>Live Demo</span>
                         </motion.a>
                       )}
                     </div>
