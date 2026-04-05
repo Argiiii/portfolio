@@ -1,7 +1,16 @@
-import { useState, useEffect, useCallback } from 'react';
-import { projectsAPI } from '../api';
+import { useState } from 'react';
 
 const defaultProjects = [
+  {
+    id: '1',
+    title: 'Ada.com',
+    description: 'Aplikasi hotel dan traveling komprehensif dengan fitur pemesanan kamar, reservasi pesawat, rencana perjalanan, dan pembayaran aman.',
+    tags: ['React.js', 'Node.js', 'Vercel'],
+    category: 'web',
+    image: '✈️',
+    github: 'https://github.com/Argiiii/ada.com',
+    live: 'https://adaacom.vercel.app/',
+  },
   {
     id: '2',
     title: 'Smart Saving App',
@@ -56,60 +65,24 @@ const defaultProjects = [
 
 export function useProjects() {
   const [projects, setProjects] = useState(defaultProjects);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const loadProjects = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const data = await projectsAPI.getAll();
-      if (data && data.length > 0) {
-        setProjects(data);
-      }
-    } catch (err) {
-      console.error('Failed to load projects:', err);
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadProjects();
-  }, [loadProjects]);
+  const [isLoading] = useState(false);
+  const [error] = useState(null);
 
   const addProject = async (project) => {
-    try {
-      const newProject = await projectsAPI.create(project);
-      setProjects((prev) => [newProject, ...prev]);
-      return newProject;
-    } catch (err) {
-      console.error('Failed to add project:', err);
-      throw err;
-    }
+    const newProject = { ...project, id: Date.now().toString() };
+    setProjects((prev) => [newProject, ...prev]);
+    return newProject;
   };
 
   const updateProject = async (id, updatedProject) => {
-    try {
-      const updated = await projectsAPI.update(id, updatedProject);
-      setProjects((prev) =>
-        prev.map((p) => (p.id === id ? updated : p))
-      );
-      return updated;
-    } catch (err) {
-      console.error('Failed to update project:', err);
-      throw err;
-    }
+    setProjects((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, ...updatedProject } : p))
+    );
+    return { id, ...updatedProject };
   };
 
   const deleteProject = async (id) => {
-    try {
-      await projectsAPI.delete(id);
-      setProjects((prev) => prev.filter((p) => p.id !== id));
-    } catch (err) {
-      console.error('Failed to delete project:', err);
-      throw err;
-    }
+    setProjects((prev) => prev.filter((p) => p.id !== id));
   };
 
   const getProject = (id) => {
@@ -124,6 +97,5 @@ export function useProjects() {
     updateProject,
     deleteProject,
     getProject,
-    refresh: loadProjects,
   };
 }
