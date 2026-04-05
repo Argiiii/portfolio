@@ -176,7 +176,7 @@ export default function Projects() {
                     </motion.button>
                   </div>
 
-                  <div className="h-48 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-7xl relative overflow-hidden">
+                  <div className="h-40 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-6xl relative overflow-hidden">
                     <motion.span
                       whileHover={{ scale: 1.1 }}
                       className="relative z-10"
@@ -186,44 +186,47 @@ export default function Projects() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                   
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-2">
+                  <div className="p-5">
+                    <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="px-3 py-1 bg-blue-600/20 text-blue-400 text-xs rounded-full capitalize">
                         {project.category === 'ai' ? 'AI/ML' : project.category}
                       </span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-400 transition-colors">
+                    <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-slate-400 mb-4 leading-relaxed text-sm">
+                    <p className="text-slate-400 mb-4 leading-relaxed text-sm line-clamp-2">
                       {project.description}
                     </p>
+                    
                     <div className="flex flex-wrap gap-2 mb-4">
+                      <span className="text-xs text-slate-500 mr-1">{language === 'id' ? 'Teknologi:' : 'Tech:'}</span>
                       {project.tags.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300"
+                          className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-slate-300"
                         >
                           {tag}
                         </span>
                       ))}
                       {project.tags.length > 4 && (
-                        <span className="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-400">
+                        <span className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-slate-400">
                           +{project.tags.length - 4}
                         </span>
                       )}
                     </div>
-                    <div className="flex gap-4 pt-2 border-t border-slate-700/50">
+                    
+                    <div className="flex gap-3 pt-3 border-t border-slate-700/50">
                       {project.github && (
                         <motion.a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ scale: 1.1 }}
-                          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm"
+                          whileHover={{ scale: 1.05 }}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 hover:text-white transition-colors text-xs"
                         >
-                          <Github size={16} />
-                          <span>{t('projects.code')}</span>
+                          <Github size={14} />
+                          <span className="truncate">{project.github.replace('https://github.com/', '')}</span>
                         </motion.a>
                       )}
                       {project.live && (
@@ -231,11 +234,11 @@ export default function Projects() {
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ scale: 1.1 }}
-                          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm"
+                          whileHover={{ scale: 1.05 }}
+                          className="flex-1 flex items-center justify-center gap-1.5 py-2 gradient-bg rounded-lg text-white text-xs font-medium"
                         >
-                          <ExternalLink size={16} />
-                          <span>{t('projects.live')}</span>
+                          <ExternalLink size={14} />
+                          <span className="truncate">{project.live.replace('https://', '').replace('http://', '')}</span>
                         </motion.a>
                       )}
                     </div>
